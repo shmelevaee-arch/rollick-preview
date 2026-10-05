@@ -1,0 +1,267 @@
+:root { --edge: clamp(20px, 5vw, 64px); --ink: #0E1320; --muted: #5C6475; --line: #E6E8EE; --blue: #0E1320; --accent: #0E1320; --night: #0D0F12; --soft: #EAF0F6; --soft-line: #D3DCE6; --bg: #FFFFFF; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 "Golos Text", system-ui, sans-serif; }
+.wrap { width: min(1320px, 100% - 2 * clamp(20px, 5vw, 64px)); margin-inline: auto; }
+a:focus-visible, .tile:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+/* шапка */
+.bar { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+.bar__logo { font: 800 24px "Manrope", sans-serif; letter-spacing: -.025em; color: var(--ink); text-decoration: none; }
+.bar nav { display: flex; gap: 32px; align-items: center; }
+.bar nav a:not(.btn) { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
+
+/* кнопки и ссылки */
+/* кнопка без цветовой заливки: при наведении текст перекатывается вверх, кнопка тянется за курсором (рецепт Apple, пружина) */
+:root { --spring: linear(0, .009, .035 2.1%, .141, .281 6.7%, .723 12.9%, .938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, .991, .977 51%, .974 53.8%, .975 57.1%, .997 69.8%, 1.003 76.9%, 1); }
+.btn { position: relative; display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; border-radius: 999px; background: #fff; color: var(--ink);
+  font-weight: 600; font-size: 16px; text-decoration: none; transition: background .25s, scale .5s var(--spring); }
+.btn:hover { background: #E9EBEF; }
+.btn:active { scale: .95; transition-duration: .12s; }
+.btn__roll { display: inline-grid; height: 1.25em; line-height: 1.25em; overflow: hidden; }
+.btn__roll > span { transition: transform .55s var(--spring); }
+.btn:hover .btn__roll > span, .btn:focus-visible .btn__roll > span { transform: translateY(-100%); }
+.btn--sm { min-height: 42px; padding: 0 20px; font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .btn__roll > span { transition: none; } .btn:hover .btn__roll > span { transform: none; } }
+.link { color: var(--ink); transition: text-decoration-color .2s; font-weight: 600; text-decoration: underline; text-decoration-color: #C9CEDA; text-underline-offset: 6px; }
+
+/* обложка по Reelio: тёмная сцена со скруглёнными углами, три ролика во всю высоту, заголовок снизу */
+.hero { padding: 8px; background: var(--bg); }
+.hero__box { position: relative; display: flex; flex-direction: column; height: calc(100svh - 16px); min-height: 640px; max-height: 1100px;
+  border-radius: 20px; background: var(--night); color: #F2F2EF; overflow: hidden; }
+.hero .bar__logo, .hero .bar nav a:not(.btn) { color: #F2F2EF; }
+.hero .bar nav a:not(.btn) { opacity: .75; transition: opacity .2s; }
+.hero .bar nav a:not(.btn):hover { opacity: 1; }
+.reels { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); align-content: center; gap: 24px; width: min(1320px, 100% - 2 * clamp(20px, 5vw, 64px)); margin-inline: auto; padding-top: 4px; container-type: size; }
+.reel { position: relative; flex: none; margin: 0; cursor: pointer; transition: transform .5s cubic-bezier(.3, .7, .2, 1), opacity .4s; }
+/* ролик заполняет свою колонку сетки на всю доступную высоту, лишнее по краям кадра обрезается */
+.reel video { width: 100%; aspect-ratio: 9 / 16; height: auto; max-height: calc(100cqh - 34px); object-fit: cover; border-radius: 12px; display: block; background: #1A1D22; }
+.reel figcaption { height: 30px; display: flex; align-items: end; gap: 8px; font-size: 14px; color: #8D939B; }
+.reel figcaption b { color: #F2F2EF; font-weight: 500; }
+.reels.has-focus .reel { opacity: .45; }
+.reels.has-focus .reel.is-focus { opacity: 1; transform: scale(1.025); }
+.reel__sound { position: absolute; right: 10px; top: 10px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(13, 15, 18, .6); color: #fff; cursor: pointer; display: grid; place-items: center; }
+.reel__sound svg { width: 18px; height: 18px; }
+.hero__foot { display: flex; align-items: end; justify-content: space-between; gap: 32px; padding: clamp(20px, 3vh, 36px) 0 clamp(24px, 4vh, 44px); }
+.hero h1 { margin: 0; font: 800 clamp(40px, min(5.2vw, 8.6vh), 88px)/.94 "Manrope", sans-serif; letter-spacing: -.035em; }
+.hero .lead { margin: 14px 0 0; max-width: 34em; font-size: clamp(15px, 1.1vw, 17px); color: #8D939B; }
+.dots { display: none; }
+@media (max-width: 809px) {
+  .bar { height: 64px; gap: 12px; }
+  .bar__logo { font-size: 20px; }
+  .btn--sm { padding: 0 16px; font-size: 14px; white-space: nowrap; }
+  .bar nav a:not(.btn) { display: none; }
+  .hero__box { height: calc(100svh - 16px); min-height: 640px; max-height: none; }
+  /* лента роликов занимает всё свободное место и листается свайпом; края выровнены по логотипу */
+  .reels { display: flex; width: auto; margin: 0 var(--edge); padding: 0; gap: 12px; justify-content: flex-start; align-items: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 0; scrollbar-width: none; container-type: size; }
+  .reels::-webkit-scrollbar { display: none; }
+  /* один ролик на экран: на всю колонку, высота – всё свободное место; следующий листается свайпом, точки показывают, сколько их */
+  .reel { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .reel video { width: 100%; height: max(240px, calc(100cqh - 30px)); max-height: none; aspect-ratio: auto; }
+  .reel figcaption { height: 30px; }
+  .dots { display: flex; justify-content: center; margin: 0; }
+  .dots button { all: unset; box-sizing: border-box; padding: 12px 4px; cursor: pointer; }
+  .dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, .45); transition: width .3s var(--out), background .3s; }
+  .dots i.on { width: 18px; border-radius: 3px; background: #fff; }
+  .hero__foot { flex-direction: column; align-items: start; gap: 12px; padding: 14px 0 20px; }
+  .hero h1 { font-size: clamp(30px, 8.6vw, 40px); }
+  .hero__side { gap: 12px; }
+  .hero .lead { font-size: 15px; line-height: 1.4; }
+  .facts { margin: 0; gap: 6px; } .facts li { padding: 4px 10px; font-size: 13px; }
+  .hero__side .btn { min-height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .reel { transition: none; } .reels.has-focus .reel.is-focus { transform: none; } html { scroll-behavior: auto; } }
+
+/* студия: огромное название и текст, который проявляется по словам при прокрутке */
+.studio { background: var(--soft); padding: clamp(64px, 10vw, 140px) 0; }
+.studio__grid { display: grid; grid-template-columns: 4fr 8fr; gap: 40px clamp(32px, 6vw, 96px); }
+.studio__who { display: flex; align-items: center; gap: 14px; margin: 0; align-self: start; }
+.studio__who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.studio__who figcaption { display: flex; flex-direction: column; font-size: 14px; color: var(--muted); }
+.studio__who b { font-size: 16px; font-weight: 600; color: var(--ink); }
+.reveal { margin: 0; font: 600 clamp(24px, 2.6vw, 40px)/1.22 "Manrope", sans-serif; letter-spacing: -.02em; color: var(--ink); }
+.reveal .w { color: #B4B4AE; transition: color .3s; }
+.reveal .w.on { color: var(--ink); }
+@media (max-width: 809px) { .studio__grid { grid-template-columns: 1fr; } }
+
+/* работы: тёмный блок, компактная сетка – два горизонтальных ролика сверху, четыре вертикальных ниже */
+.works { margin: 0; padding: clamp(64px, 8vw, 112px) 0; border-radius: 0; background: var(--night); color: #F2F2EF; }
+.works__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(32px, 4vw, 48px); }
+.works__head p { margin: 0; color: #8D939B; }
+.works__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 20px; }
+.work { margin: 0; }
+.work--h { grid-column: span 2; }
+.work__media { position: relative; overflow: hidden; border-radius: 12px; background: #1A1D22; cursor: pointer; }
+.work--h .work__media { aspect-ratio: 16 / 9; }
+.work--v .work__media { aspect-ratio: 9 / 16; }
+.work__media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: scale .6s var(--spring); }
+.work:hover .work__media video { scale: 1.03; }
+.work h3 { margin: 16px 0 8px; font: 700 clamp(17px, 1.4vw, 21px)/1.25 "Manrope", sans-serif; letter-spacing: -.01em; }
+.work__meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.work__meta li { padding: 4px 10px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 999px; font-size: 12px; color: #C9CDD2; }
+@media (max-width: 809px) { .works__grid { grid-template-columns: 1fr 1fr; gap: 32px 12px; } .works__head { flex-direction: column; align-items: start; } }
+
+/* общий заголовок светлых секций */
+.h2 { margin: 0; font: 800 clamp(40px, 5vw, 72px)/1 "Manrope", sans-serif; letter-spacing: -.035em; }
+
+/* услуги: строки на всю ширину, при наведении строка подсвечивается */
+.svc { padding: clamp(80px, 10vw, 140px) 0; }
+.svc__list { list-style: none; margin: clamp(32px, 5vw, 56px) 0 0; padding: 0; border-top: 1px solid var(--line); }
+.svc__list li { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); transition: padding .35s cubic-bezier(.3, .7, .2, 1); }
+.svc__list li:hover { padding-left: 16px; }
+.svc__list h3 { margin: 0; font: 700 clamp(22px, 2.2vw, 32px)/1.15 "Manrope", sans-serif; letter-spacing: -.02em; }
+.svc__list p { margin: 0; color: var(--muted); font-size: 17px; }
+
+/* этапы: последовательность, поэтому с номерами */
+.steps { background: var(--soft); padding: clamp(80px, 10vw, 140px) 0; }
+.steps__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+.steps__head p { margin: 0; max-width: 24em; font-size: 19px; color: var(--muted); }
+.steps__list { list-style: none; margin: clamp(32px, 5vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
+.steps__list li { padding: 20px 16px 24px; border-top: 2px solid var(--ink); }
+.steps__list span { font: 700 14px "Manrope", sans-serif; color: var(--muted); }
+.steps__list h3 { margin: 28px 0 8px; font: 700 19px/1.2 "Manrope", sans-serif; }
+.steps__list p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); }
+@media (max-width: 1199px) { .steps__list { grid-template-columns: repeat(4, 1fr); gap: 24px 12px; } }
+@media (max-width: 809px) { .svc__list li { grid-template-columns: 1fr; gap: 6px; } .steps__list { grid-template-columns: 1fr 1fr; } .steps__head { flex-direction: column; align-items: start; } }
+
+/* все светлые секции на той же вертикали, что и содержимое тёмных блоков (+8px отступа сцены) */
+body > section:not(.hero) > .wrap { width: min(1320px, 100% - 2 * (clamp(20px, 5vw, 64px) + 8px)); }
+
+/* цены */
+.price { padding: clamp(80px, 10vw, 140px) 0; }
+.price__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: clamp(32px, 5vw, 56px); }
+.plan { display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: 16px; background: var(--soft); }
+.plan h3 { margin: 0; font: 700 18px "Manrope", sans-serif; color: var(--muted); }
+.plan__sum { margin: 8px 0 0; font: 800 clamp(36px, 3.6vw, 52px)/1 "Manrope", sans-serif; letter-spacing: -.03em; }
+.plan p:not(.plan__sum) { margin: 0 0 16px; color: var(--muted); flex: 1; }
+.plan .btn { align-self: start; background: var(--ink); color: #fff; }
+.plan .btn:hover { background: #262C3A; }
+.plan--dark { background: var(--night); color: #F2F2EF; }
+.plan--dark h3, .plan--dark p:not(.plan__sum) { color: #8D939B; }
+.plan--dark .btn { background: #fff; color: var(--ink); }
+.plan--dark .btn:hover { background: #E9EBEF; }
+.price__note { margin: 24px 0 0; color: var(--muted); }
+
+/* вопросы */
+.faq { background: var(--soft); padding: clamp(80px, 10vw, 140px) 0; }
+.faq__grid { display: grid; grid-template-columns: 4fr 8fr; gap: 40px; }
+.faq details { border-bottom: 1px solid var(--soft-line); }
+.faq details:first-child { border-top: 1px solid var(--soft-line); }
+.faq summary { display: flex; justify-content: space-between; gap: 24px; padding: 22px 0; cursor: pointer; list-style: none; font: 700 clamp(18px, 1.5vw, 21px)/1.3 "Manrope", sans-serif; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-weight: 400; transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 22px; max-width: 40em; color: var(--muted); }
+
+/* контакты и подвал: тёмная сцена, как обложка */
+.contact { margin: 0; padding: clamp(80px, 12vw, 160px) 0 32px; border-radius: 0; background: var(--night); color: #F2F2EF; }
+.contact__title { margin: 0; max-width: 14em; font: 800 clamp(40px, 5.4vw, 80px)/1 "Manrope", sans-serif; letter-spacing: -.035em; }
+.contact__lead { margin: 24px 0 0; max-width: 32em; color: #8D939B; font-size: 18px; }
+.contact__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+.foot { display: flex; justify-content: space-between; gap: 16px; padding-right: 76px; margin-top: clamp(80px, 10vw, 140px); padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: 14px; color: #8D939B; }
+.foot p { margin: 0; }
+.foot a { color: #C9CDD2; }
+
+/* плавающая кнопка Telegram */
+.fab { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--ink);
+  box-shadow: 0 0 0 1px rgba(14, 19, 32, .12); transition: transform .3s cubic-bezier(.3, .7, .2, 1), background .3s, color .3s; }
+.fab svg { width: 24px; height: 24px; }
+.fab:hover { transform: scale(1.08); background: var(--ink); color: #fff; }
+
+@media (max-width: 809px) { .price__grid, .faq__grid { grid-template-columns: 1fr; } }
+
+/* клиенты сразу под обложкой: названия крупно, под ними что делали */
+.clients { padding: clamp(56px, 7vw, 96px) 0; }
+.clients__title { margin: 0 0 32px; font: 600 15px "Golos Text", sans-serif; color: var(--muted); }
+.clients__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); }
+.clients__list li { padding: 22px 20px 0 0; }
+.clients__list b { font: 800 clamp(20px, 1.9vw, 28px)/1.1 "Manrope", sans-serif; letter-spacing: -.02em; }
+.clients__list span { font-size: 14px; color: var(--muted); }
+@media (max-width: 1199px) { .clients__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 20px; } }
+@media (max-width: 809px) { .clients__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; } .clients__list li { padding-right: 0; } }
+
+/* факты на обложке: цена, срок, договор – то, что заказчик ищет первым */
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.facts li { padding: 6px 14px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; font-size: 14px; color: #F2F2EF; }
+.work__task { margin: -4px 0 12px; font-size: 14px; color: #8D939B; }
+
+/* ===== анимации по мотивам эффектов Framer: заставка, вход обложки, параллакс, шторки, линии, счётчики ===== */
+:root { --out: cubic-bezier(.2, .8, .2, 1); }
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+.hero h1 .line > span { display: inline-block; }
+
+/* 1. заставка: буквы выезжают по одной, потом шторка уходит вверх */
+.intro { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; background: var(--night); transition: transform .9s var(--out); }
+.intro__word { margin: 0; display: flex; overflow: hidden; font: 800 clamp(48px, 9vw, 140px)/1 "Manrope", sans-serif; letter-spacing: -.04em; color: #F2F2EF; }
+.intro__word span { display: inline-block; transform: translateY(105%); transition: transform .7s var(--out) calc(var(--i) * 60ms); }
+.js-motion.intro-on .intro { display: grid; }
+.intro.go .intro__word span { transform: none; }
+.intro.away { transform: translateY(-100%); }
+
+/* 2. вход обложки: строки заголовка из-под маски, ролики лесенкой */
+.js-motion .hero h1 .line > span, .js-motion .reel, .js-motion .hero .lead, .js-motion .hero .facts, .js-motion .hero__foot > .btn { transition: transform 1s var(--out), opacity .8s var(--out); }
+.js-motion:not(.hero-in) .hero h1 .line > span { transform: translateY(110%); }
+.js-motion:not(.hero-in) .reel { opacity: 0; transform: translateY(60px) scale(.96); }
+.js-motion:not(.hero-in) .hero .lead, .js-motion:not(.hero-in) .hero .facts, .js-motion:not(.hero-in) .hero__foot > .btn { opacity: 0; transform: translateY(16px); }
+.js-motion .hero h1 .line:nth-child(2) > span { transition-delay: .08s; }
+.js-motion .reel:nth-child(2) { transition-delay: .09s; } .js-motion .reel:nth-child(3) { transition-delay: .18s; }
+.js-motion .hero .lead { transition-delay: .25s; } .js-motion .hero .facts { transition-delay: .32s; } .js-motion .hero__foot > .btn { transition-delay: .38s; }
+
+/* 3. обложка от прокрутки: значения ставит motion.js в --p (0…1) */
+.hero__box { transform: scale(calc(1 - var(--p, 0) * .06)); transform-origin: 50% 0; border-radius: calc(20px + var(--p, 0) * 16px); }
+.reel { translate: 0 calc(var(--p, 0) * var(--rate, 0) * -1px); }
+.reel:nth-child(1) { --rate: 40; } .reel:nth-child(2) { --rate: 110; } .reel:nth-child(3) { --rate: 70; }
+
+/* 4. работы: карточка открывается шторкой снизу */
+.js-motion .work { transition: clip-path 1s var(--out), transform 1s var(--out), opacity .6s; }
+.js-motion .work:not(.in) { clip-path: inset(18% 0 0 0 round 12px); transform: translateY(48px); opacity: 0; }
+
+/* 5. этапы: линия над шагом прорисовывается слева направо */
+.steps__list li { position: relative; border-top-color: transparent; }
+.steps__list li::before { content: ""; position: absolute; left: 0; right: 0; top: -2px; height: 2px; background: var(--ink); transform-origin: 0 50%; transition: transform .7s var(--out) calc(var(--i, 0) * 110ms); }
+.js-motion .steps__list:not(.in) li::before { transform: scaleX(0); }
+
+/* 7. кнопка Telegram появляется после обложки */
+.js-motion .fab { transition: transform .5s var(--spring), opacity .3s, background .3s, color .3s; }
+.js-motion:not(.past-hero) .fab { opacity: 0; transform: scale(.6); pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-motion .intro { display: none !important; }
+  .hero__box, .reel { transform: none; translate: none; }
+}
+
+/* низ обложки: слева заголовок, справа подзаголовок, факты и кнопка – так ролики сохраняют высоту */
+.hero__foot { align-items: end; }
+.hero__side { flex: 0 0 min(400px, 34%); display: flex; flex-direction: column; align-items: start; gap: 16px; }
+.hero__side .lead { margin: 0; }
+.hero__side .facts { margin: 0; }
+.js-motion .hero__side > .btn { transition: transform 1s var(--out), opacity .8s var(--out), background .25s, scale .5s var(--spring); transition-delay: .38s; }
+.js-motion:not(.hero-in) .hero__side > .btn { opacity: 0; transform: translateY(16px); }
+@media (max-width: 809px) { .hero__side { flex-basis: auto; } }
+/* телефон: плавающая кнопка закрывала текст – убираем её, подвал в колонку */
+@media (max-width: 809px) { .fab { display: none; } .foot { flex-direction: column; padding-right: 0; } }
+
+/* планшет 810–1199: заголовок на всю ширину, под ним в ряд подзаголовок и кнопка – ролики получают высоту */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .hero__box { height: auto; min-height: 0; max-height: none; }
+  .reels { flex: none; container-type: normal; padding-top: 8px; }
+  .reel video { aspect-ratio: 3 / 4; max-height: none; }
+  .hero__foot { flex-direction: column; align-items: stretch; gap: 18px; padding-top: 16px; }
+  .hero__side { flex: none; width: 100%; flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 24px; }
+  .hero__side .lead { flex: 1 1 320px; max-width: 34em; }
+  .hero h1 { font-size: clamp(40px, 6.4vw, 72px); }
+  .works__grid { gap: 32px 16px; }
+  .plan { padding: 22px; }
+}
+.btn, .faq summary, .fab { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) { .btn--sm { min-height: 44px; } .faq summary { padding-block: 18px; } }
+
+/* кнопка обложки на всю ширину текстового блока; светлое пятно ходит за курсором (цвет кнопки остаётся белым) */
+.hero__side { align-items: stretch; }
+.hero__side .btn { justify-content: center; min-height: 58px; font-size: 17px; overflow: hidden; isolation: isolate; }
+.hero__side .btn::before { content: ""; position: absolute; left: var(--sx, 50%); top: var(--sy, 50%); width: 14px; height: 14px; border-radius: 50%; background: #D6E3FF;
+  transform: translate(-50%, -50%) scale(0); transition: transform .6s var(--out); z-index: -1; pointer-events: none; }
+.hero__side .btn:hover::before, .hero__side .btn:focus-visible::before { transform: translate(-50%, -50%) scale(60); }
+@media (min-width: 810px) and (max-width: 1199px) { .hero__side { align-items: stretch; } .hero__side .btn { flex: 1 1 100%; } }
+
+.nowrap { white-space: nowrap; }
