@@ -1,4 +1,4 @@
-:root { --edge: clamp(20px, 5vw, 64px); --ink: #0E1320; --muted: #5C6475; --line: #E6E8EE; --blue: #0E1320; --accent: #0E1320; --night: #0D0F12; --soft: #EAF0F6; --soft-line: #D3DCE6; --bg: #FFFFFF; }
+:root { --edge: clamp(20px, 5vw, 64px); --ink: #151515; --muted: #6E6E68; --line: #E4E3DE; --blue: #4D5BFF; --accent: #4D5BFF; --tint: #EEF0FF; --night: #18181A; --soft: #F7F7F5; --soft-line: #E4E3DE; --bg: #F7F7F5; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 "Golos Text", system-ui, sans-serif; }
@@ -129,7 +129,7 @@ body > section:not(.hero) > .wrap { width: min(1320px, 100% - 2 * (clamp(20px, 5
 .plan__sum { margin: 8px 0 0; font: 800 clamp(36px, 3.6vw, 52px)/1 "Manrope", sans-serif; letter-spacing: -.03em; }
 .plan p:not(.plan__sum) { margin: 0 0 16px; color: var(--muted); flex: 1; }
 .plan .btn { align-self: start; background: var(--ink); color: #fff; }
-.plan .btn:hover { background: #262C3A; }
+.plan .btn:hover { background: #2B2B2E; }
 .plan--dark { background: var(--night); color: #F2F2EF; }
 .plan--dark h3, .plan--dark p:not(.plan__sum) { color: #8D939B; }
 .plan--dark .btn { background: #fff; color: var(--ink); }
@@ -268,9 +268,9 @@ body > section:not(.hero) > .wrap { width: min(1320px, 100% - 2 * (clamp(20px, 5
 .foot a:hover { color: #fff; }
 .plan { transition: transform .4s var(--out), background .3s; }
 .plan:hover { transform: translateY(-4px); }
-.clients__list li:hover b { color: var(--blue-ui, #1F5BFF); }
-.faq summary:hover { color: #1F5BFF; }
-a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 3px solid #1F5BFF; outline-offset: 3px; border-radius: 12px; }
+.clients__list li:hover b { color: var(--blue-ui, #4D5BFF); }
+.faq summary:hover { color: #4D5BFF; }
+a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 3px solid #4D5BFF; outline-offset: 3px; border-radius: 12px; }
 .hero a:focus-visible, .contact a:focus-visible { outline-color: #fff; }
 
 /* вопросы раскрываются плавно (Chrome 131+, Safari и Firefox пока раскрывают мгновенно) */
@@ -315,7 +315,7 @@ html { scrollbar-width: thin; scrollbar-color: #8D939B transparent; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #8D939B; border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: #5C6475; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: #6E6E68; background-clip: padding-box; }
 
 /* цифры: что уже сделано, стоят на месте */
 .nums { list-style: none; margin: clamp(48px, 7vw, 96px) 0 0; padding: clamp(28px, 4vw, 44px) 0 0; border-top: 1px solid var(--soft-line); display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 24px; }
@@ -380,7 +380,41 @@ html { scrollbar-width: thin; scrollbar-color: #8D939B transparent; }
 .float__links a:hover { color: var(--ink); background: var(--soft); }
 .float__links a.on { color: var(--ink); background: var(--soft); }
 .float .btn { background: var(--ink); color: #fff; }
-.float .btn:hover { background: #262C3A; }
+.float .btn:hover { background: #2B2B2E; }
 section[id], .studio, .clients { scroll-margin-top: 84px; }
 @media (max-width: 809px) { .float__links { display: none; } .float { padding-left: 18px; } .float__cta { min-height: 40px; } }
 @media (prefers-reduced-motion: reduce) { .float { transition: none; } }
+
+/* правки по аудиту: порядок секций, 5 этапов, микротексты */
+.hero__note { margin: 0; font-size: 13px; line-height: 1.4; color: #8D939B; }
+.clients .nums { margin-top: clamp(40px, 5vw, 64px); border-top-color: var(--line); }
+.works__more { display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; margin-top: clamp(32px, 4vw, 48px); }
+.works__more p { margin: 0; font: 700 clamp(18px, 1.6vw, 22px) "Manrope", sans-serif; }
+.steps { background: #fff; }
+.steps__list { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 1199px) { .steps__list { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 809px) { .steps__list { grid-template-columns: 1fr; } }
+.price { background: var(--soft); }
+.plan { background: #fff; }
+.plan--dark { background: var(--night); }
+.proof { padding: clamp(80px, 10vw, 140px) 0; }
+.proof .review { margin: 0; padding-top: 0; border-top: 0; }
+.contact__note { margin: 16px 0 0; font-size: 14px; color: #8D939B; }
+
+/* палитра «Дорогой digital»: тёплая база #F7F7F5, графит #151515, один акцент #4D5BFF, тинт #EEF0FF, тёмные блоки #18181A */
+.svc, .steps, .proof { background: #fff; }
+.work[data-spot] { background: #222226; }
+.work__media { background: #2A2A2E; }
+.hero__side .btn, .contact__buttons .btn { background: var(--accent); color: #fff; }
+.hero__side .btn:hover, .contact__buttons .btn:hover { background: #3D4AE0; }
+.hero__side .btn::before { background: #3340C9; }
+.nums b { color: var(--accent); }
+.nums span { color: var(--ink); }
+.clients__list b { color: #55554F; transition: color .25s; }
+.clients__list li:hover b { color: var(--ink); }
+.bento__tile .svc__ico, .svc__ico { background: var(--tint); color: var(--accent); }
+.bento__tile:hover .svc__ico { background: var(--accent); color: #fff; }
+.filter button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.review__lead { color: var(--ink); }
+.plan--dark .btn { background: #fff; color: var(--ink); }
+.plan--dark .btn:hover { background: #E9EBEF; }
