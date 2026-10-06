@@ -339,3 +339,28 @@ html { scrollbar-width: thin; scrollbar-color: #8D939B transparent; }
 .quote { margin: clamp(40px, 6vw, 80px) 0 0; padding-top: 28px; border-top: 1px solid var(--soft-line); max-width: 900px; }
 .quote blockquote { margin: 0; font: 700 clamp(24px, 3vw, 44px)/1.15 "Manrope", sans-serif; letter-spacing: -.025em; color: var(--ink); }
 .quote figcaption { margin-top: 20px; color: var(--muted); font-size: 16px; }
+
+/* отзыв: слева крупная фраза, справа полный текст */
+.review { display: grid; grid-template-columns: 5fr 7fr; gap: 24px clamp(32px, 6vw, 96px); margin: clamp(48px, 7vw, 96px) 0 0; padding-top: clamp(28px, 4vw, 44px); border-top: 1px solid var(--soft-line); }
+.review__lead { margin: 0; font: 800 clamp(26px, 3vw, 46px)/1.1 "Manrope", sans-serif; letter-spacing: -.03em; color: var(--ink); }
+.review__text { margin: 0; display: grid; gap: 14px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: var(--ink); }
+.review__text p { margin: 0; }
+.review figcaption { grid-column: 1 / -1; color: var(--muted); font-size: 16px; }
+@media (max-width: 809px) { .review { grid-template-columns: 1fr; } }
+
+/* подвал: две ссылки рядом */
+.foot__links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+@media (max-width: 809px) { .foot__links { flex-direction: column; } }
+
+/* страница документа (политика) */
+.doc-page { background: #fff; }
+.doc-bar { display: flex; justify-content: space-between; align-items: center; height: 84px; }
+.doc-bar .bar__logo { color: var(--ink); }
+.doc-back { color: var(--muted); text-decoration: none; font-weight: 500; }
+.doc-back:hover { color: var(--ink); }
+.doc { max-width: 760px; margin-inline: 0; padding: clamp(24px, 4vw, 56px) 0 clamp(64px, 9vw, 120px); width: min(760px, 100% - 2 * var(--edge)); margin-left: max(var(--edge), calc((100% - 1320px) / 2)); }
+.doc h1 { margin: 0; font: 800 clamp(34px, 4.4vw, 56px)/1.05 "Manrope", sans-serif; letter-spacing: -.035em; }
+.doc__date { margin: 12px 0 40px; color: var(--muted); }
+.doc h2 { margin: 36px 0 10px; font: 700 clamp(20px, 2vw, 26px)/1.2 "Manrope", sans-serif; letter-spacing: -.02em; }
+.doc p { margin: 0 0 14px; font-size: 17px; line-height: 1.6; }
+.doc a { color: var(--ink); text-decoration-color: #B9C2D0; text-underline-offset: 3px; }
