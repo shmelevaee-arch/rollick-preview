@@ -418,3 +418,4 @@ section[id], .studio, .clients { scroll-margin-top: 84px; }
 .review__lead { color: var(--ink); }
 .plan--dark .btn { background: #fff; color: var(--ink); }
 .plan--dark .btn:hover { background: #E9EBEF; }
+@media (max-width: 809px) { .nums b { min-width: 3.3ch; } }
