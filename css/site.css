@@ -167,9 +167,9 @@ body > section:not(.hero) > .wrap { width: min(1320px, 100% - 2 * (clamp(20px, 5
 /* клиенты сразу под обложкой: названия крупно, под ними что делали */
 .clients { padding: clamp(56px, 7vw, 96px) 0; }
 .clients__title { margin: 0 0 32px; font: 600 15px "Golos Text", sans-serif; color: var(--muted); }
-.clients__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); }
+.clients__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .clients__list li { padding: 22px 20px 0 0; }
-.clients__list b { font: 800 clamp(20px, 1.9vw, 28px)/1.1 "Manrope", sans-serif; letter-spacing: -.02em; }
+.clients__list b { font: 800 clamp(18px, 1.55vw, 24px)/1.15 "Manrope", sans-serif; letter-spacing: -.02em; }
 .clients__list span { font-size: 14px; color: var(--muted); }
 @media (max-width: 1199px) { .clients__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 20px; } }
 @media (max-width: 809px) { .clients__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; } .clients__list li { padding-right: 0; } }
