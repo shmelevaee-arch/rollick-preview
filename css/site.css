@@ -107,7 +107,7 @@ a:focus-visible, .tile:focus-visible { outline: 3px solid var(--blue); outline-o
 /* услуги: строки на всю ширину, при наведении строка подсвечивается */
 .svc { padding: clamp(80px, 10vw, 140px) 0; }
 .svc__list { list-style: none; margin: clamp(32px, 5vw, 56px) 0 0; padding: 0; border-top: 1px solid var(--line); }
-.svc__list li { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); transition: padding .35s cubic-bezier(.3, .7, .2, 1); }
+.svc__list li { display: grid; grid-template-columns: 52px 1fr 1fr; gap: 24px; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--line); transition: padding .35s cubic-bezier(.3, .7, .2, 1); }
 .svc__list li:hover { padding-left: 16px; }
 .svc__list h3 { margin: 0; font: 700 clamp(22px, 2.2vw, 32px)/1.15 "Manrope", sans-serif; letter-spacing: -.02em; }
 .svc__list p { margin: 0; color: var(--muted); font-size: 17px; }
@@ -265,3 +265,27 @@ body > section:not(.hero) > .wrap { width: min(1320px, 100% - 2 * (clamp(20px, 5
 @media (min-width: 810px) and (max-width: 1199px) { .hero__side { align-items: stretch; } .hero__side .btn { flex: 1 1 100%; } }
 
 .nowrap { white-space: nowrap; }
+
+/* значки услуг (Lucide, лицензия ISC): круг, при наведении на строку заливается и значок белеет */
+.svc__ico { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); color: var(--ink); transition: background .3s var(--out), color .3s, scale .5s var(--spring); }
+.ico { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.svc__list li:hover .svc__ico { background: var(--ink); color: #fff; scale: 1.08; }
+@media (max-width: 809px) { .svc__list li { grid-template-columns: 52px 1fr; gap: 6px 16px; } .svc__list li p { grid-column: 2; } }
+
+/* наведение и фокус: везде, где можно нажать или раскрыть */
+.bar nav a:not(.btn), .foot a, .clients__list li, .faq summary, .plan { transition: opacity .2s, color .2s, background .3s var(--out), transform .4s var(--out); }
+.foot a:hover { color: #fff; }
+.plan { transition: transform .4s var(--out), background .3s; }
+.plan:hover { transform: translateY(-4px); }
+.clients__list li:hover b { color: var(--blue-ui, #1F5BFF); }
+.faq summary:hover { color: #1F5BFF; }
+a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 3px solid #1F5BFF; outline-offset: 3px; border-radius: 12px; }
+.hero a:focus-visible, .contact a:focus-visible { outline-color: #fff; }
+
+/* вопросы раскрываются плавно (Chrome 131+, Safari и Firefox пока раскрывают мгновенно) */
+@supports (interpolate-size: allow-keywords) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq details::details-content { block-size: 0; overflow: clip; transition: block-size .45s var(--out), content-visibility .45s allow-discrete; }
+  .faq details[open]::details-content { block-size: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .plan:hover { transform: none; } .faq details::details-content { transition: none; } }
