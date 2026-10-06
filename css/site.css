@@ -369,3 +369,18 @@ html { scrollbar-width: thin; scrollbar-color: #8D939B transparent; }
 .hero__title .lead { margin: 18px 0 0; max-width: 34em; font-size: clamp(16px, 1.2vw, 18px); color: #8D939B; }
 @media (min-width: 1200px) { .hero__foot > .hero__title { grid-column: 1 / span 2; } .hero__side { justify-content: flex-end; } }
 @media (min-width: 810px) and (max-width: 1199px) { .hero__side { justify-content: space-between; } }
+
+/* плавающее меню: появляется, когда обложка ушла, всегда ведёт на главное и по разделам */
+.float { position: fixed; top: 12px; left: 50%; z-index: 60; width: min(980px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 22px;
+  border-radius: 999px; background: #fff; border: 1px solid var(--line); translate: -50% -160%; opacity: 0; pointer-events: none; transition: translate .5s var(--out), opacity .3s; }
+.past-hero .float { translate: -50% 0; opacity: 1; pointer-events: auto; }
+.float__logo { font: 800 20px "Manrope", sans-serif; letter-spacing: -.02em; color: var(--ink); text-decoration: none; }
+.float__links { display: flex; gap: 6px; }
+.float__links a { padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 500; font-size: 15px; text-decoration: none; transition: background .2s, color .2s; }
+.float__links a:hover { color: var(--ink); background: var(--soft); }
+.float__links a.on { color: var(--ink); background: var(--soft); }
+.float .btn { background: var(--ink); color: #fff; }
+.float .btn:hover { background: #262C3A; }
+section[id], .studio, .clients { scroll-margin-top: 84px; }
+@media (max-width: 809px) { .float__links { display: none; } .float { padding-left: 18px; } .float__cta { min-height: 40px; } }
+@media (prefers-reduced-motion: reduce) { .float { transition: none; } }

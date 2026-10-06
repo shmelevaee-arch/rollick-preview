@@ -41,4 +41,14 @@
   once(document.querySelectorAll('.work'), w => w.classList.add('in'), .15);
   document.querySelectorAll('.steps__list li').forEach((li, i) => li.style.setProperty('--i', i));
   once(document.querySelectorAll('.steps__list'), l => l.classList.add('in'), .3);
+
+  // подсветка раздела в плавающем меню
+  const links = [...document.querySelectorAll('.float__links a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (secs.length) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(sec => io.observe(sec));
+  }
 }
