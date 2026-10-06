@@ -364,3 +364,8 @@ html { scrollbar-width: thin; scrollbar-color: #8D939B transparent; }
 .doc h2 { margin: 36px 0 10px; font: 700 clamp(20px, 2vw, 26px)/1.2 "Manrope", sans-serif; letter-spacing: -.02em; }
 .doc p { margin: 0 0 14px; font-size: 17px; line-height: 1.6; }
 .doc a { color: var(--ink); text-decoration-color: #B9C2D0; text-underline-offset: 3px; }
+
+/* низ обложки на компьютере: слева заголовок и под ним подзаголовок, справа плашки и кнопка */
+.hero__title .lead { margin: 18px 0 0; max-width: 34em; font-size: clamp(16px, 1.2vw, 18px); color: #8D939B; }
+@media (min-width: 1200px) { .hero__foot > .hero__title { grid-column: 1 / span 2; } .hero__side { justify-content: flex-end; } }
+@media (min-width: 810px) and (max-width: 1199px) { .hero__side { justify-content: space-between; } }
